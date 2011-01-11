@@ -5,6 +5,8 @@ use warnings;
 use Data::Uniqid qw/suniqid/;
 use String::ShellQuote qw/shell_quote/;
 
+my $ver = `xprop -root 8s PXEXEC_VERSION`;
+die "Did not find pxlisten on root window" if $ver =~ /not found/;
 my $cmd = join ' ', shell_quote @ARGV;
 my $host = `uname -n`;
 chomp $host;

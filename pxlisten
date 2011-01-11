@@ -4,6 +4,11 @@ use warnings;
 
 my $verbose = grep /^(-v|--verbose)$/, @ARGV;
 
+system('xprop', '-f', 'PXEXEC_VERSION', '8s', '-root', '-set', 'PXEXEC_VERSION', '0.1');
+END {
+	system('xprop', '-root', '-remove', 'PXEXEC_VERSION');
+}
+$SIG{INT} = sub {};
 open my $h, '-|', 'xprop', '-root', '-spy'
 	or die "Could not listen to property changes using xprop: $!";
 while (<$h>) {
@@ -28,4 +33,3 @@ while (<$h>) {
 		}
 	}
 }
-
