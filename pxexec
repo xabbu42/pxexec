@@ -1,0 +1,9 @@
+#!/usr/bin/env perl 
+
+use strict;
+use warnings;
+use Data::Uniqid qw/suniqid/;
+
+my $cmd = join ' ', @ARGV;
+my $prop = 'PXEXEC_' . suniqid;
+system('xprop', '-f', $prop, '8s', '-root', '-set', $prop, $cmd);
