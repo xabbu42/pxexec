@@ -15,7 +15,7 @@ my $pid = open my $h, '-|', 'xprop', '-root', '-spy'
 	or die "Could not listen to property changes using xprop: $!";
 my $res;
 while (<$h>) {
-	if (/^PXEXEC_RESULT_$id\(STRING\)\s*=\s*(.*)$/) {
+	if (/^PXEXEC_RESULT_\Q$id\E\(STRING\)\s*=\s*(.*)$/) {
 		$res = $1;
 		last;
 	}

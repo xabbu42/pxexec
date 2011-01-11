@@ -5,7 +5,7 @@ use warnings;
 open my $h, '-|', 'xprop', '-root', '-spy'
 	or die "Could not listen to property changes using xprop: $!";
 while (<$h>) {
-	if (/^PXEXEC_CMD_([\w.]+)\(STRING\)\s*=\s*(.*)$/) {
+	if (/^PXEXEC_CMD_([\w.-]+)\(STRING\)\s*=\s*(.*)$/) {
 		my ($id, $cmd) = ($1, eval $2);
 		system('xprop', '-root', '-remove', 'PXEXEC_CMD_' . $id);
 		if ($cmd) {
