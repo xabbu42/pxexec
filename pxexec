@@ -7,5 +7,21 @@ use Data::Uniqid qw/suniqid/;
 my $cmd = join ' ', @ARGV;
 my $host = `uname -n`;
 chomp $host;
-my $prop = 'PXEXEC_' . $host . '_' . suniqid;
-system('xprop', '-f', $prop, '8s', '-root', '-set', $prop, $cmd);
+my $id = $host . '_' . suniqid;
+my $prop = 'PXEXEC_CMD_' . $id;
+system('xprop', '-f', $prop, '8s', '-root', '-set', $prop, $cmd)
+	and die "Could not set property on root window using xprop: $!";
+my $pid = open my $h, '-|', 'xprop', '-root', '-spy'
+	or die "Could not listen to property changes using xprop: $!";
+my $res;
+while (<$h>) {
+	if (/^PXEXEC_RESULT_$id\(STRING\)\s*=\s*(.*)$/) {
+		$res = $1;
+		last;
+	}
+}
+kill 9, $pid;
+close($h);
+system('xprop', '-root', '-remove', 'PXEXEC_RESULT_' . $id);
+die "Did not get result from command." unless $res;
+print eval $res;
