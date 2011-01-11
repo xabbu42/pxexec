@@ -2,6 +2,8 @@
 use strict;
 use warnings;
 
+my $verbose = grep /^(-v|--verbose)$/, @ARGV;
+
 open my $h, '-|', 'xprop', '-root', '-spy'
 	or die "Could not listen to property changes using xprop: $!";
 while (<$h>) {
@@ -9,7 +11,7 @@ while (<$h>) {
 		my ($id, $cmd) = ($1, eval $2);
 		system('xprop', '-root', '-remove', 'PXEXEC_CMD_' . $id);
 		if ($cmd) {
-			warn "$id: $cmd";
+			warn "$id: $cmd" if $verbose;
 			my $output = `$cmd` // "";
 			my $res;
 			if ($? == -1) {
