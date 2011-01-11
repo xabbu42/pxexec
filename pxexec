@@ -3,8 +3,9 @@
 use strict;
 use warnings;
 use Data::Uniqid qw/suniqid/;
+use String::ShellQuote qw/shell_quote/;
 
-my $cmd = join ' ', @ARGV;
+my $cmd = join ' ', shell_quote @ARGV;
 my $host = `uname -n`;
 chomp $host;
 my $id = $host . '_' . suniqid;
