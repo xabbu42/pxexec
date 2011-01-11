@@ -5,5 +5,7 @@ use warnings;
 use Data::Uniqid qw/suniqid/;
 
 my $cmd = join ' ', @ARGV;
-my $prop = 'PXEXEC_' . suniqid;
+my $host = `uname -n`;
+chomp $host;
+my $prop = 'PXEXEC_' . $host . '_' . suniqid;
 system('xprop', '-f', $prop, '8s', '-root', '-set', $prop, $cmd);
