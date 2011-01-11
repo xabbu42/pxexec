@@ -8,6 +8,7 @@ while (<$h>) {
 	if (/^PXEXEC_(\w+)\(STRING\)\s*=\s*(.*)$/) {
 		my ($id, $cmd) = ($1, eval $2);
 		warn "$id: $cmd";
+		system('xprop', '-root', '-remove', 'PXEXEC_' . $id);
 	}
 }
 
