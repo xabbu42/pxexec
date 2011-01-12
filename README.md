@@ -19,6 +19,26 @@ Usage
 
 To start pxlisten automatically when starting your X session, add `pxlisten &` to your ~/.xinitrc, or use `pxlisten -v 2> pxlisten.log &` to get a log file with the executed commands.
 
+Example Script for Emacs
+------------------------
+
+    #!/usr/bin/env perl
+    use strict;
+    use warnings;
+
+    use File::Spec::Functions qw/rel2abs/;
+
+    if ($ENV{'SSH_CLIENT'}) {
+    	my $host = `uname -n`;
+    	chomp $host;
+    	system 'pxexec', 'emacsclient', '-c', map {
+    		$_ = "/" . $host . ":" . rel2abs($_) unless $_ =~ /^-/;
+    		$_;
+    	} @ARGV;
+    } else {
+    	system 'emacsclient', '-c', @ARGV;
+    }
+
 Todos and Ideas
 ---------------
 
