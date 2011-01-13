@@ -45,8 +45,6 @@ Todos and Ideas
 This is not a roadmap.
 
 - Implement configurable restrictions to what commands can be executed.
-- Avoid eval of arbitrary strings for security (this only makes sense after restrictions are implemented).
 - Consider supporting to stream output using [Coro](http://search.cpan.org/~mlehmann/Coro/). Currently all output is read in pxlisten and send to pxexec as one block. So you only see any output from pxexec after the command finished.
 - Add usage and some standard command line options to the tools.
-- Consider using X11::Protocol instead of xprop
 
