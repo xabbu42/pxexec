@@ -20,9 +20,9 @@ BEGIN {
 }
 
 sub get_property {
-	my ($prop) = @_;
+	my ($prop, $delete) = @_;
 	my ($value, $type, $format, $bytes_after) =
-		$x->GetProperty($x->root, $x->atom($prop), $x->atom('STRING'), 0, -1, 0);
+		$x->GetProperty($x->root, $x->atom($prop), $x->atom('STRING'), 0, -1, !!$delete);
 	return $value;
 }
 
@@ -37,7 +37,7 @@ sub remove_property {
 }
 
 sub wait_property {
-	my ($prop) = @_;
+	my ($prop, $delete) = @_;
 	$prop = qr/\Q$prop\E/ unless ref $prop;
 	$x->ChangeWindowAttributes(
 		$x->root,
@@ -53,7 +53,7 @@ sub wait_property {
 			last;
 		}
 	}
-	return $e ? ($res, get_property($name)) : null;
+	return $e ? ($res, get_property($name, $delete)) : null;
 }
 
 1;
