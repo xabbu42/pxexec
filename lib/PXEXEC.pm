@@ -37,7 +37,7 @@ sub remove_property {
 }
 
 sub wait_property {
-	my ($prop, $delete) = @_;
+	my ($prop, $delete, $action) = @_;
 	$prop = qr/\Q$prop\E/ unless ref $prop;
 	$x->ChangeWindowAttributes(
 		$x->root,
@@ -45,6 +45,7 @@ sub wait_property {
 	);
 	$x->{event_handler} = 'queue';
 	my $e, $res, $name;
+	$action->() if $action;
 	while ($e = {$x->next_event}) {
 		next unless $e->{state} eq "NewValue";
 		$name = $x->atom_name($e->{atom});

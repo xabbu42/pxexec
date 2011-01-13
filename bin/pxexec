@@ -17,8 +17,12 @@ my $cmd = join ' ', shell_quote @ARGV;
 my $host = `uname -n`;
 chomp $host;
 my $id = $host . '_' . suniqid;
-set_property('PXEXEC_CMD_' . $id, $cmd);
-my ($prop, $res) = wait_property('PXEXEC_RESULT_' . $id, 'delete');
+
+my ($prop, $res) = wait_property(
+	'PXEXEC_RESULT_' . $id, 'delete',
+	sub { set_property('PXEXEC_CMD_' . $id, $cmd); },
+);
+
 die $res unless defined $res && $res =~ /\t/;
 my ($exitcode, $output) = split "\t", $res, 2;
 print $output;
