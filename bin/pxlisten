@@ -1,0 +1,27 @@
+#!/usr/bin/env perl 
+use strict;
+use warnings;
+
+use lib './lib';
+use PXEXEC;
+
+my $verbose = grep /^(-v|--verbose)$/, @ARGV;
+set_property('PXEXEC_VERSION', '0.1');
+END {
+	remove_property('PXEXEC_VERSION')
+}
+$SIG{INT} = sub {};
+while ((my ($id, $cmd) = wait_property(qr/^PXEXEC_CMD_([\w.-]+)$/))) {
+	remove_property('PXEXEC_CMD_' . $id);
+	warn "$id: $cmd" if $verbose;
+	my $output = `$cmd` // "";
+	my $res;
+	if ($? == -1) {
+		$res = "Can't exec \"$cmd\": $!";
+	} elsif ($? & 127) {
+		$res = "Child died with signal " . ($? & 127);
+	} else {
+		$res = ($? >> 8) . "\t" . $output;
+	}
+	set_property('PXEXEC_RESULT_' . $id, $res);
+}
