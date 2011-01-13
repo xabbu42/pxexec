@@ -33,7 +33,7 @@ sub set_property {
 
 sub remove_property {
 	my ($prop) = @_;
-	#$x->DeleteProperty($x->root, $x->atom($prop));
+	$x->DeleteProperty($x->root, $x->atom($prop));
 }
 
 sub wait_property {
