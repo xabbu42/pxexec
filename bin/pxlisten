@@ -10,8 +10,7 @@ END {
 	remove_property('PXEXEC_VERSION')
 }
 $SIG{INT} = sub {};
-while ((my ($id, $cmd) = wait_property(qr/^PXEXEC_CMD_([\w.-]+)$/))) {
-	remove_property('PXEXEC_CMD_' . $id);
+while ((my ($id, $cmd) = wait_property(qr/^PXEXEC_CMD_([\w.-]+)$/, 'delete'))) {
 	warn "$id: $cmd" if $verbose;
 	my $output = `$cmd` // "";
 	my $res;
