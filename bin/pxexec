@@ -2,10 +2,10 @@
 
 use strict;
 use warnings;
+
 use Data::Uniqid qw/suniqid/;
 use String::ShellQuote qw/shell_quote/;
 
-use lib './lib';
 use PXEXEC;
 
 my $ver = get_property('PXEXEC_VERSION');

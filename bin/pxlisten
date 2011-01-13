@@ -2,7 +2,6 @@
 use strict;
 use warnings;
 
-use lib './lib';
 use PXEXEC;
 
 my $verbose = grep /^(-v|--verbose)$/, @ARGV;
