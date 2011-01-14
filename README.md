@@ -1,11 +1,24 @@
 
-pxexec
-======
-
 Description
 -----------
 
 pxexec is a tool to execute commands over the X11 protocol, inspired by [xexec](http://gpl.internetconnection.net/). I use pxexec to securely call local commands from a remote machine over X11 forwarding.
+
+Installation
+------------
+
+pxexec is easiest to install with [cpanminus](http://search.cpan.org/~miyagawa/App-cpanminus-1.1006/lib/App/cpanminus.pm):
+
+    cpanm https://github.com/downloads/xabbu42/pxexec/App-pxexec-0.2.tar.gz
+
+If you want to install pxexec manually you can use the following commands:
+
+    wget --no-check-certificate https://github.com/downloads/xabbu42/pxexec/App-pxexec-0.2.tar
+	tar -xzf App-pxexec-0.2.tar
+	cd App-pxexec-0.2
+	perl Makefile.PL	
+	make
+	sudo make install
 
 Usage
 -----
