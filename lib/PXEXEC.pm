@@ -11,7 +11,6 @@ use Sub::Exporter -setup => {
 };
 
 use X11::Protocol;
-use YAML qw/Dump/;
 
 my $x;
 BEGIN {
