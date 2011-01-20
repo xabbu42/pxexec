@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 
-use PXEXEC;
+use Pxexec;
 
 my $verbose = grep /^(-v|--verbose)$/, @ARGV;
 set_property('PXEXEC_VERSION', '0.1');

@@ -1,5 +1,5 @@
 
-package PXEXEC;
+package Pxexec;
 
 my @exports;
 BEGIN {
