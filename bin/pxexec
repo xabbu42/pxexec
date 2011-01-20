@@ -1,12 +1,36 @@
-#!/usr/bin/env perl 
+#!/usr/bin/env perl
+
+=head1 NAME
+
+pxexec - execute commands over X11 protocol
+
+=head1 SYNOPSIS
+
+pxexec [options] command
+
+execute commands over X11 protocol
+
+=head1 OPTIONS
+
+ --help|-h   brief help message
+
+=cut
 
 use strict;
 use warnings;
 
+use Pxexec;
+
+use Getopt::Long;
+use Pod::Usage;
 use Data::Uniqid qw/suniqid/;
 use String::ShellQuote qw/shell_quote/;
 
-use Pxexec;
+my ($help);
+GetOptions(
+	"help|h"    => \$help,
+	) or pod2usage(-exitval => 2, -verbose => 1);
+pod2usage(-verbose => 1) if $help;
 
 my $ver = get_property('PXEXEC_VERSION');
 die "No pxlisten process found! You need to run pxlisten somewhere."

@@ -1,15 +1,43 @@
 #!/usr/bin/env perl 
+
+=head1 NAME
+
+pxlisten - listen for pxexec commands
+
+=head1 SYNOPSIS
+
+pxlisten [options]
+
+listen for pxexec commands
+
+=head1 OPTIONS
+
+ --help|-h     brief help message
+ --verbose|-v  log commands to stderr
+
+=cut
+
 use strict;
 use warnings;
 
 use Pxexec;
 
-my $verbose = grep /^(-v|--verbose)$/, @ARGV;
+use Getopt::Long;
+use Pod::Usage;
+
+my ($verbose, $help);
+GetOptions(
+	"help|h"    => \$help,
+	"verbose|v" => \$verbose,
+	) or pod2usage(-exitval => 2);
+pod2usage(-verbose => 1) if $help;
+
 set_property('PXEXEC_VERSION', '0.1');
 END {
 	remove_property('PXEXEC_VERSION')
 }
 $SIG{INT} = sub {};
+
 while ((my ($id, $cmd) = wait_property(qr/^PXEXEC_CMD_([\w.-]+)$/, 'delete'))) {
 	warn "$id: $cmd" if $verbose;
 	my $output = `$cmd` // "";
