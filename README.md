@@ -14,21 +14,21 @@ pxexec is easiest to install with [cpanminus](http://search.cpan.org/~miyagawa/A
 If you want to install pxexec manually you can use the following commands:
 
     wget --no-check-certificate https://github.com/downloads/xabbu42/pxexec/App-pxexec-0.2.tar
-	tar -xzf App-pxexec-0.2.tar
-	cd App-pxexec-0.2
-	perl Makefile.PL	
-	make
-	sudo make install
+    tar -xzf App-pxexec-0.2.tar
+    cd App-pxexec-0.2
+    perl Makefile.PL
+    make
+    sudo make install
 
 Usage
 -----
 
     localhost:~ $ echo foobar > gna
-	localhost:~ $ pxlisten &
-	localhost:~ $ ssh -X otherhost
-	otherhost:~ $ pxexec cat gna
-	foobar
-	otherhost:~
+    localhost:~ $ pxlisten &
+    localhost:~ $ ssh -X otherhost
+    otherhost:~ $ pxexec cat gna
+    foobar
+    otherhost:~
 
 To start pxlisten automatically when starting your X session, add `pxlisten &` to your ~/.xinitrc, or use `pxlisten -v 2> pxlisten.log &` to get a log file with the executed commands.
 
