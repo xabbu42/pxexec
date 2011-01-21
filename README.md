@@ -9,7 +9,7 @@ Installation
 
 pxexec is easiest to install with [cpanminus](http://search.cpan.org/~miyagawa/App-cpanminus-1.1006/lib/App/cpanminus.pm):
 
-    cpanm https://github.com/downloads/xabbu42/pxexec/App-pxexec-0.2.tar.gz
+    cpanm --no-lwp --no-wget https://github.com/downloads/xabbu42/pxexec/App-pxexec-0.2.tar.gz
 
 If you want to install pxexec manually you can use the following commands:
 
