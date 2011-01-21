@@ -13,8 +13,8 @@ pxexec is easiest to install with [cpanminus](http://search.cpan.org/~miyagawa/A
 
 If you want to install pxexec manually you can use the following commands:
 
-    wget --no-check-certificate https://github.com/downloads/xabbu42/pxexec/App-pxexec-0.2.tar
-    tar -xzf App-pxexec-0.2.tar
+    wget --no-check-certificate https://github.com/downloads/xabbu42/pxexec/App-pxexec-0.2.tar.gz
+    tar -xzf App-pxexec-0.2.tar.gz
     cd App-pxexec-0.2
     perl Makefile.PL
     make
@@ -59,5 +59,4 @@ This is not a roadmap.
 
 - Implement configurable restrictions to what commands can be executed.
 - Consider supporting to stream output using [Coro](http://search.cpan.org/~mlehmann/Coro/). Currently all output is read in pxlisten and send to pxexec as one block. So you only see any output from pxexec after the command finished.
-- Add usage and some standard command line options to the tools.
 
