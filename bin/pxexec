@@ -21,7 +21,7 @@ use warnings;
 
 use Pxexec;
 
-use Getopt::Long;
+use Getopt::Long qw/:config require_order/;
 use Pod::Usage;
 use Data::Uniqid qw/suniqid/;
 use String::ShellQuote qw/shell_quote/;
