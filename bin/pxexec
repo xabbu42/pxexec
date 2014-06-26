@@ -32,6 +32,9 @@ GetOptions(
 	) or pod2usage(-exitval => 2, -verbose => 1);
 pod2usage(-verbose => 1) if $help;
 
+$SIG{ALRM} = sub { die "pxexec timed out\n" };
+alarm 2;
+
 my $ver = get_property('PXEXEC_VERSION');
 die "No pxlisten process found! You need to run pxlisten somewhere."
 	unless $ver;
